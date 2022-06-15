@@ -72,40 +72,6 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-//   try {
-//     const newProduct = req.body;
-//     let products = await product.create({
-//       ...newProduct,
-//       image: req.file.filename,
-//       idUser: req.user.id,
-//     });
-
-//     products = JSON.parse(JSON.stringify(products));
-
-//     products = {
-//       ...products,
-//       image: process.env.PATH_FILE + products.image,
-//     };
-
-//     console.log(products);
-
-//     res.status(200).send({
-//       status: "Success",
-//       message: "Add Product Success",
-//       data: products,
-//     });
-//   } catch (error) {
-//     // console.log(error);
-//     console.log(req.user);
-//     console.log(error);
-
-//     res.status(500).send({
-//       status: "Add Product Failed",
-//       message: "Server Error",
-//     });
-//   }
-// };
-
 exports.getProducts = async (req, res) => {
   try {
     let data = await product.findAll({

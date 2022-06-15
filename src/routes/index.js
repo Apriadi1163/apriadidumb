@@ -42,8 +42,8 @@ const {
 const { login, checkAuth, register } = require("../controller/auth");
 const { auth } = require("../middleware/auth");
 const { uploadFile } = require("../middleware/uploadFile");
-const { changepic } = require("../controller/imgAdd");
-const { addPic, updatePic } = require("../controller/Pic");
+// const { changepic } = require("../controller/imgAdd");
+const { addPicture, updatePicture, getPictures } = require("../controller/Pic");
 
 router.post("/user", addUser);
 router.get("/users", getUsers);
@@ -79,7 +79,8 @@ router.post("/login", login);
 router.get("/checkauth", auth, checkAuth);
 
 // router.post("/editpic", uploadFile("image"), changepic);
-router.post("/addpic", uploadFile("image"), addPic);
-router.patch("/updatepic", uploadFile("image"), updatePic);
+router.post("/addpicture", auth, uploadFile("image"), addPicture);
+router.patch("/updatepicture/:id", auth, uploadFile("image"), updatePicture);
+router.get("/pictures", getPictures);
 
 module.exports = router;

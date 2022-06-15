@@ -31,35 +31,30 @@ exports.addProfiles = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
+    const { id } = req.params;
     const data = req.body;
+    if (req.file) {
+      data.image = req.file.filename;
+    }
 
     let updateProfile = await profile.update(
       {
         ...data,
-        image: req?.file?.filename,
+        idUser: req.user.id,
       },
-      { where: { id: req.user.id } }
+      { where: { id } }
     );
 
-    console.log(req.user.id);
     updateProfile = JSON.parse(JSON.stringify(data));
 
     updateProfile = {
       ...updateProfile,
-      image: updateProfile.image
-        ? process.env.PATH_FILE + req?.file?.filename
-        : null,
+      image: process.env.PATH_FILE + updateProfile.image,
     };
 
-    await user.update(req.body, {
-      where: {
-        id: req.user.id,
-      },
-    });
-
     res.status(200).send({
-      status: "success",
-      message: `update Product success`,
+      status: "Success",
+      message: `Update profile at id: ${id} success`,
       data: {
         profile: updateProfile,
       },
@@ -67,7 +62,7 @@ exports.updateProfile = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).send({
-      status: "failed",
+      status: "Updated profile failed",
       message: "Server Error",
     });
   }
