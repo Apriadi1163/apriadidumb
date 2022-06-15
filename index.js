@@ -23,4 +23,4 @@ app.use(cors());
 app.use("/api/v1/", router);
 app.use("/uploads", express.static("uploads"));
 
-server.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`));
