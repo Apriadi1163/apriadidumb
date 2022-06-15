@@ -1,7 +1,6 @@
 {
   
   "development": {
-    "use_env_variable": "DATABASE_URL",
     "username": "root",
     "password": null,
     "database": "apriadi-batch34",
